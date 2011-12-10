@@ -14,5 +14,5 @@ The application will execute a Wi-Fi Scan, on a android service, every X seconds
 
 # Setup
 
-## Android Application
+### Android Application
 * Set the network SSID to yours in the attribute SSID on the *ipl.meicm.sps.controller.ScanService* class;
