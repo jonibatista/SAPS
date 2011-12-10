@@ -24,7 +24,7 @@ import android.widget.Toast;
 public class ScanService extends Service {
 	private static final long UPDATE_TIMER = 4000;
 	private static final int NUMBER_SCAN = 5;
-	private static final String SSID = "DLink-B6EE0F";// "Thomson5682BF"; //
+	private static final String SSID = "saps";// "Thomson5682BF"; //
 	// "DLink-B6EE0F";
 
 	private Timer time;
