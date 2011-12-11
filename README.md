@@ -1,18 +1,27 @@
 # Description
 
-This is a android aplication that uses wireless signal triangulation of a local network to calculate the position of a mobile device.
+This is a android that uses wireless signal triangulation of a local network to calculate the position of a mobile device.
 
-# Requirements
+## Requirements
 
-* Android 2.2 froyo at least;
-* wi-fi connection on;
+* Android 2.2 froyo at least to run the **SAPSClient** module;
+* Apache and MySQL to run the **SAPSWebSite**;
+* Glassfish to tun the **SAPSWebService**.
 
-# How it works
+## Modules
+
+### SAPSClient
+
+
+### SAPSWebService
+
+
+### SAPSWebSite
+
  
-The application will execute a Wi-Fi Scan, on a android service, every X seconds to get the available access point information, such as the signal strength. Then the service will check if the device is moving or not. For this, the system compares the last sacn result with the previous. Finally, if the device is moving the service will sent the  traced Access Points information to the Web Service and will receive the current position.
-**(descrive the interface...)**
 
-# Setup
+## Development Notes
 
-### Android Application
-* Set the network SSID to yours in the attribute SSID on the *ipl.meicm.sps.controller.ScanService* class;
+* The **SAPSCliente** project is developed in **eclipse** IDE;
+* The **SAPSWebService** project is developed in **netbeans** IDE;
+* The **SAPSWebSite** project is developed in **netbeans** IDE.
