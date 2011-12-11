@@ -4,6 +4,7 @@ class Model_advertisment extends ORM
 {  
     protected $_attach_allow = true;
     protected $_attach_allowed_extensions = 'jpg jpeg pdf tif tiff';
+    protected $_primary_key = 'ida';
     
     public function rules() {
        

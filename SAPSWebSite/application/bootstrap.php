@@ -94,7 +94,7 @@ Kohana::$config->attach(new Config_File);
 /**
  * Download Folder.
  */
-Upload::$default_directory = APPPATH . 'upload';
+Upload::$default_directory = 'upload';
 
 
 /**

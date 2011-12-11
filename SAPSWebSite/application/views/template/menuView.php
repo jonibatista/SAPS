@@ -5,8 +5,6 @@
             <ul class="nav">
                 <li><a href="/SAPSWebSite/">Home</a></li>
                 <?php if (Person::$isLoggedIn) : ?>
-                    <li <?php echo ($context == "gallery") ? 'class="active"' : ''; ?>><a href="/SAPSWebSite/store/gallery">Galeria</a></li>
-                    <li <?php echo ($context == "addContent") ? 'class="active"' : ''; ?>><a href="/SAPSWebSite/store/addContent">Adicionar Conteúdo</a></li>
                     <li <?php echo ($context == "adv") ? 'class="active"' : ''; ?>><a href="/SAPSWebSite/store/adv">Anuncios</a></li>
                     <li <?php echo ($context == "addadv") ? 'class="active"' : ''; ?>><a href="/SAPSWebSite/store/addadv">Adicionar Anuncios</a></li>
                     <?php  if (Person::$isAdmin): ?>

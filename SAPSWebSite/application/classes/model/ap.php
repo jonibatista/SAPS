@@ -2,6 +2,8 @@
   
 class Model_ap extends ORM  
 {  
+    protected $_primary_key = 'ida';
+    
     public function rules() {
        
         
@@ -12,7 +14,6 @@ class Model_ap extends ORM
 		);
     
     }
-    
     
     protected $_has_many = array( 
     

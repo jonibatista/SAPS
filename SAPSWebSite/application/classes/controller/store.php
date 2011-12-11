@@ -90,16 +90,30 @@ class Controller_Store extends Controller_Saps {
         if (!Person::$isLoggedIn) {
             Request::current()->redirect("user/login");
         }
-
-        $shops = ORM::factory('advertisment')->find_all();
-        $ko3 = array ();
-        $ko3['content'] = $shops;
         
         $this->template->context = "Anuncios Publicados";
         $this->template->page_title = 'Anuncios Publicados';
         $this->template->page_subtitle = 'Anuncios Publicados';
+        
+        if (HTTP_Request::POST == $this->request->method())
+        {
+                
+            $post = $_POST;
+            
+            $user = ORM::factory('advertisment')->find($post['id']);
+            $user->delete();
+
+        }
+
+        $shops = ORM::factory('advertisment')->find_all();
+        $ko3 = array ();
+        $ko3['content'] = $shops;
+ 
         $this->template->content = View::factory('pages/advertismentView', $ko3);
        
+        
+        
+        
     }
     
 
@@ -157,7 +171,7 @@ class Controller_Store extends Controller_Saps {
                 
                 //devolve mensagem de successo
                     $message = array(
-                        'valid' => 'Store Susseful Created'
+                        'valid' => ' Advertisment Successful Created'
                     );
                 
             }
@@ -303,7 +317,7 @@ class Controller_Store extends Controller_Saps {
                     $roleuser->save();
                         //devolve mensagem de successo
                     $message = array(
-                        'valid' => 'Store Susseful Created'
+                        'valid' => ' Store Successful Created'
                     );
                     
                     
@@ -386,7 +400,7 @@ class Controller_Store extends Controller_Saps {
                     
                     $dtr = array(
                         'id_s' => $post['store'],
-                        'id_a' => $ap->id,
+                        'id_a' => $ap->ida,
                         'valuest' => $post['valuest']
                         
                         
@@ -397,7 +411,7 @@ class Controller_Store extends Controller_Saps {
                     $storeap->save();
                         //devolve mensagem de successo
                     $message = array(
-                        'valid' => 'Store Susseful Created'
+                        'valid' => ' AP Successful Created'
                     );
                                  
             }
@@ -429,8 +443,25 @@ class Controller_Store extends Controller_Saps {
         $this->template->page_title = 'AP';
         $this->template->page_subtitle = 'AP';
        
-        $shops = ORM::factory('ap')->find_all();
         
+        if (HTTP_Request::POST == $this->request->method())
+        {
+            $post = $_POST;
+            
+            $storeid = new Model_storeap;
+            $storeid->where('id_a', '=', $post['id'])->find();
+            
+            $apstore = ORM::factory('storeap')->find($storeid->idsa);
+            $apstore->delete();
+            
+            $ap = ORM::factory('ap')->find($post['id']);
+            $ap->delete();
+              
+            
+        }
+        
+        
+        $shops = ORM::factory('ap')->find_all(); 
         $ko3 = array ();
         $ko3['content'] = $shops;
         

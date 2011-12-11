@@ -180,9 +180,11 @@ CONSTRAINT aps_pkey PRIMARY KEY (ida)
 -- comando para criar a tabela Store_AP
 
 CREATE TABLE IF NOT EXISTS store_ap(
+	idsa	    int(10)	unsigned	NOT NULL AUTO_INCREMENT,
 	id_s      	int(10)	unsigned	NOT NULL,
 	id_a     	int(10) unsigned 	NOT NULL,
 	valuest		INTEGER     NOT NULL,
+	CONSTRAINT storeap_pkey PRIMARY KEY (idsa),
 CONSTRAINT fk_store_id FOREIGN KEY (id_s)
       REFERENCES stores (ids),
 CONSTRAINT fk_ap_id_ FOREIGN KEY (id_a)
