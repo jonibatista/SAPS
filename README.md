@@ -1,6 +1,6 @@
 # Description
 
-This is a android that uses wireless signal triangulation of a local network to calculate the position of a mobile device.
+This system aims to use wireless signal triangulation of a local network to calculate the current position of a mobile device in the building.
 
 ## Requirements
 
@@ -22,6 +22,6 @@ This is a android that uses wireless signal triangulation of a local network to 
 
 ## Development Notes
 
-* The **SAPSCliente** project is developed in **eclipse** IDE;
-* The **SAPSWebService** project is developed in **netbeans** IDE;
-* The **SAPSWebSite** project is developed in **netbeans** IDE.
+* The **SAPSCliente** project is developed in ***eclipse*** IDE;
+* The **SAPSWebService** project is developed in ***netbeans*** IDE;
+* The **SAPSWebSite** project is developed in ***netbeans*** IDE.
