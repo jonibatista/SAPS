@@ -1,0 +1,3 @@
+[submodule "AndroidSelfSignedSSL"]
+	path = AndroidSelfSignedSSL
+	url = git@github.com:cesarferreira/Android-using-self-signed-SSL-certificates-.git
