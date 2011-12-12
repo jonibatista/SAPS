@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Aps.findAll", query = "SELECT a FROM Aps a"),
-    @NamedQuery(name = "Aps.findByIda", query = "SELECT a FROM Aps a WHERE a.ida = :ida"),
+    @NamedQuery(name = "Aps.findByBssid", query = "SELECT a FROM Aps a WHERE a.bssid = :bssid"),
     @NamedQuery(name = "Aps.findByApmac", query = "SELECT a FROM Aps a WHERE a.apmac = :apmac"),
     @NamedQuery(name = "Aps.findByPosition", query = "SELECT a FROM Aps a WHERE a.position = :position")})
 public class Aps implements Serializable {
@@ -36,8 +36,8 @@ public class Aps implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ida")
-    private Integer ida;
+    @Column(name = "bssid")
+    private String bssid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -50,21 +50,21 @@ public class Aps implements Serializable {
     public Aps() {
     }
 
-    public Aps(Integer ida) {
-        this.ida = ida;
+    public Aps(String bssid) {
+        this.bssid = bssid;
     }
 
-    public Aps(Integer ida, String apmac) {
-        this.ida = ida;
+    public Aps(String idbssida, String apmac) {
+        this.bssid = bssid;
         this.apmac = apmac;
     }
 
-    public Integer getIda() {
-        return ida;
+    public String getBssid() {
+        return bssid;
     }
 
-    public void setIda(Integer ida) {
-        this.ida = ida;
+    public void setBssid(String bssid) {
+        this.bssid = bssid;
     }
 
     public String getApmac() {
@@ -86,7 +86,7 @@ public class Aps implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (ida != null ? ida.hashCode() : 0);
+        hash += (bssid != null ? bssid.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +97,7 @@ public class Aps implements Serializable {
             return false;
         }
         Aps other = (Aps) object;
-        if ((this.ida == null && other.ida != null) || (this.ida != null && !this.ida.equals(other.ida))) {
+        if ((this.bssid == null && other.bssid != null) || (this.bssid != null && !this.bssid.equals(other.bssid))) {
             return false;
         }
         return true;
@@ -105,7 +105,7 @@ public class Aps implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Aps[ ida=" + ida + " ]";
+        return "entities.Aps[ ida=" + bssid + " ]";
     }
     
 }

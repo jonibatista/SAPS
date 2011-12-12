@@ -1,9 +1,11 @@
 package ipl.meicm.sapsclient.controller;
 
 import ipl.meicm.sapsclient.model.CalculatePosition;
+import ipl.meicm.sapsclient.model.RestComunication;
 import ipl.meicm.sapsclient.model.entity.AccessPoint;
 import ipl.meicm.sapsclient.model.entity.Device;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -21,11 +23,15 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 public class ScanService extends Service {
 	private static final long UPDATE_TIMER = 4000;
 	private static final int NUMBER_SCAN = 5;
-	private static final String SSID = "Thomson5682BF";// "Thomson5682BF"; //
+	private static final String SSID = "saps";// "Thomson5682BF"; //
 	// "DLink-B6EE0F";
+	private static final String WS_URL = "http://192.168.1.107:8080/SAPSWebService/resources/generic";
 
 	private Timer time;
 	private WifiManager wifi;
@@ -35,6 +41,7 @@ public class ScanService extends Service {
 	private List<AccessPoint> currentScanRound;
 	private List<AccessPoint> previousScanRound = null;
 	private CalculatePosition calculatePos;
+	private RestComunication com;
 
 	// Binder given to clients
 	private final IBinder mBinder = new LocalBinder();
@@ -164,16 +171,37 @@ public class ScanService extends Service {
 							previousScanRound);
 				}
 
-				Log.e("################", isMoving + "");
+				if (isMoving) {
+					try {
 
-				for (AccessPoint last : currentScanRound) {
-					for (AccessPoint prev : previousScanRound) {
-						if (last.equals(prev)) {
-							Log.e("PREVIOUS AP", "" + prev.getRssi());
-							Log.e("LAST AP", "" + last.getRssi());
-						}
+						Type collectionType = new TypeToken<ArrayList<AccessPoint>>() {
+						}.getType();
+						String gsonAps = new Gson().toJson(currentScanRound,
+								collectionType);
+
+						Log.i("GSON STRING", currentScanRound.size() + "\n"
+								+ gsonAps);
+
+						com = new RestComunication(WS_URL);
+
+						String result = com.webInvoke(gsonAps);
+
+						Log.i("RESULT", result);
+					} catch (Exception e) {
+						Log.e(ScanService.class.getName(), e.toString());
 					}
 				}
+
+//				Log.e("################", isMoving + "");
+//
+//				for (AccessPoint last : currentScanRound) {
+//					for (AccessPoint prev : previousScanRound) {
+//						if (last.equals(prev)) {
+//							Log.e("PREVIOUS AP", "" + prev.getRssi());
+//							Log.e("LAST AP", "" + last.getRssi());
+//						}
+//					}
+//				}
 
 				previousScanRound = new ArrayList<AccessPoint>(currentScanRound);
 

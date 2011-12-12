@@ -21,31 +21,6 @@ public class SAPSClientActivity extends Activity {
 	boolean mBound = false;
 	int i = 0;
 
-	Runnable result = new Runnable() {
-		Timer time = new Timer();
-
-		@Override
-		public void run() {
-			time.schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					if (mBound)
-						if (mService.isMoving()) {
-							Toast.makeText(getApplicationContext(),
-									"Device's moving.", Toast.LENGTH_SHORT)
-									.show();
-						} else {
-							Toast.makeText(getApplicationContext(),
-									"Device's not moving.", Toast.LENGTH_SHORT)
-									.show();
-						}
-				}
-
-			}, 1000, 5000);
-		}
-	};
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
