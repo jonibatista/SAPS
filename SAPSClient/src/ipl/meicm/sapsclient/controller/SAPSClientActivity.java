@@ -2,10 +2,6 @@ package ipl.meicm.sapsclient.controller;
 
 import ipl.meicm.sapsclient.R;
 import ipl.meicm.sapsclient.controller.ScanService.LocalBinder;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -49,10 +45,11 @@ public class SAPSClientActivity extends Activity {
 	public void clickHandler(View v) {
 
 		if (mService.isMoving()) {
-			Toast.makeText(getApplicationContext(), "Device's moving.",
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(),
+					"Device's moving.\n" + mService.store, Toast.LENGTH_SHORT)
+					.show();
 		} else {
-			Toast.makeText(getApplicationContext(), "Device's not moving.",
+			Toast.makeText(getApplicationContext(), mService.store,
 					Toast.LENGTH_SHORT).show();
 		}
 	}

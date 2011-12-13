@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class ScanService extends Service {
-	private static final long UPDATE_TIMER = 4000;
+	private static final long UPDATE_TIMER = 2500;
 	private static final int NUMBER_SCAN = 5;
 	private static final String SSID = "saps";// "Thomson5682BF"; //
 	// "DLink-B6EE0F";
@@ -36,12 +36,13 @@ public class ScanService extends Service {
 	private Timer time;
 	private WifiManager wifi;
 	private int i = 0;
-	private boolean isFirstScan = true, isMoving;
+	private boolean isMoving;
 	private Device device;
 	private List<AccessPoint> currentScanRound;
 	private List<AccessPoint> previousScanRound = null;
 	private CalculatePosition calculatePos;
 	private RestComunication com;
+	public String store = "";
 
 	// Binder given to clients
 	private final IBinder mBinder = new LocalBinder();
@@ -105,41 +106,47 @@ public class ScanService extends Service {
 			// refresh the scanResults
 			wifi.startScan();
 
+			boolean isApInList = false;
 			// get results
 			for (ScanResult scanR : wifi.getScanResults()) {
 
-				if (isFirstScan && scanR.SSID.equals(SSID)) {
+				if (scanR.SSID.equals(SSID)) {
+					// scan only for the our network ssid
 
-					// it's the first time of this round
-					currentScanRound.add(new AccessPoint(scanR.BSSID,
-							scanR.level, scanR.SSID));
-
-				} else {
-
-					// traced spot access points
 					for (AccessPoint ap : currentScanRound) {
 
 						// match the scan result to the respective access point
 						// in
 						// this round list
-						if (ap.getBssid().equals(scanR.BSSID)
-								&& scanR.SSID.equals(SSID)) {
+						if (ap.getBssid().equals(scanR.BSSID)) {
+
+							isApInList = true;
 
 							// add the scan level
 							ap.setRssi(ap.getRssi() + scanR.level);
+
+							ap.setScanNumber(ap.getScanNumber() + 1);
 
 							if (i % NUMBER_SCAN == 0) {
 
 								// is the last scan of this round
 								// it's time to calculate the RSSI AVG of this
 								// scans round
-								ap.setRssi(ap.getRssi() / NUMBER_SCAN);
+								ap.setRssi(ap.getRssi() / ap.getScanNumber());
 							}
 
 							break;
 						}
 					}
+
+					if (!isApInList) {
+
+						// it's the first time of this round
+						currentScanRound.add(new AccessPoint(scanR.BSSID,
+								scanR.level, scanR.SSID));
+					}
 				}
+
 			}
 
 		} else {
@@ -184,32 +191,28 @@ public class ScanService extends Service {
 
 						com = new RestComunication(WS_URL);
 
-						String result = com.webInvoke(gsonAps);
+						store = com.webInvoke(gsonAps);
 
-						Log.i("RESULT", result);
+						Log.i("RESULT", store);
 					} catch (Exception e) {
 						Log.e(ScanService.class.getName(), e.toString());
 					}
 				}
 
-//				Log.e("################", isMoving + "");
-//
-//				for (AccessPoint last : currentScanRound) {
-//					for (AccessPoint prev : previousScanRound) {
-//						if (last.equals(prev)) {
-//							Log.e("PREVIOUS AP", "" + prev.getRssi());
-//							Log.e("LAST AP", "" + last.getRssi());
-//						}
-//					}
-//				}
+				Log.e("################", isMoving + "");
+
+				for (AccessPoint last : currentScanRound) {
+					for (AccessPoint prev : previousScanRound) {
+						if (last.equals(prev)) {
+							Log.e("PREVIOUS AP", "" + prev.getRssi());
+							Log.e("LAST AP", "" + last.getRssi());
+						}
+					}
+				}
 
 				previousScanRound = new ArrayList<AccessPoint>(currentScanRound);
 
 				currentScanRound.clear();
-
-				isFirstScan = true;
-			} else {
-				isFirstScan = false;
 			}
 		}
 	}

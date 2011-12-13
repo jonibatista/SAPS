@@ -73,13 +73,22 @@ public class CalculatePosition {
     @POST
     @Consumes({"application/json","application/xml"})
     public String postCalculatePosition(String content) {
-        int i = 0;
-        
+        String store = "";
         ArrayList<AccessPoint> aps = new ArrayList<AccessPoint>();
         
         Type collection = new TypeToken<ArrayList<AccessPoint>>(){}.getType();
         aps = new Gson().fromJson(content, collection);
 
-        return "" + i;
+        for (AccessPoint ap : aps) {
+            if(ap.getBssid().equals("00:1d:73:55:f9:b0") && ap.getRssi() > -76){
+                System.out.println("######### SALA 0.2");
+                return "Sala 0.2";
+            }else if(ap.getBssid().equals("00:1d:73:55:f9:ac") && ap.getRssi() > -76){
+                System.out.println("######### SALA 0.4");
+                return "Sala 0.4";
+            }
+        }
+     
+        return "-";
     }
 }

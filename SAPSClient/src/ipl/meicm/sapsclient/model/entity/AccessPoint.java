@@ -13,6 +13,11 @@ public class AccessPoint {
 	private String bssid;
 	private int rssi;
 	private String ssid;
+	private int scanNumber;
+	
+	public AccessPoint(){
+		this.scanNumber = 0;
+	}
 
 	/**
 	 * 
@@ -28,6 +33,7 @@ public class AccessPoint {
 		this.bssid = bssid;
 		this.rssi = rssi;
 		this.ssid = ssid;
+		this.scanNumber = 1;
 	}
 
 	/**
@@ -43,6 +49,7 @@ public class AccessPoint {
 		this.bssid = ap.getBssid();
 		this.rssi = ap.getRssi();
 		this.ssid = ap.getSsid();
+		this.scanNumber = ap.getScanNumber();
 	}
 
 	public String getBssid() {
@@ -67,6 +74,14 @@ public class AccessPoint {
 
 	public void setRssi(int rssi) {
 		this.rssi = rssi;
+	}
+
+	public int getScanNumber() {
+		return scanNumber;
+	}
+
+	public void setScanNumber(int scanNumber) {
+		this.scanNumber = scanNumber;
 	}
 
 	@Override
