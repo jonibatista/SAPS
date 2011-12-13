@@ -1,3 +1,6 @@
 [submodule "AndroidSelfSignedSSL"]
 	path = AndroidSelfSignedSSL
 	url = git@github.com:cesarferreira/Android-using-self-signed-SSL-certificates-.git
+[submodule "WifiSpot"]
+	path = WifiSpot
+	url = git@github.com:jonibatista/WifiSpot.git
