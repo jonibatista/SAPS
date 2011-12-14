@@ -222,3 +222,6 @@ CONSTRAINT fk_users_id FOREIGN KEY (id_user)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+--Inserir role admin admin
+INSERT INTO `saps`.`roles_users` (`user_id`, `role_id`) VALUES ('1', '2');
+
