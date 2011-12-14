@@ -223,5 +223,5 @@ CONSTRAINT fk_users_id FOREIGN KEY (id_user)
 
 
 --Inserir role admin admin
-INSERT INTO `saps`.`roles_users` (`user_id`, `role_id`) VALUES (1, 2);
+INSERT INTO `saps`.`roles_users` (`user_id`, `role_id`) VALUES ('1', '2');
 
