@@ -14,6 +14,6 @@ SAPSClient/gen/
 SAPSWebSite/application/logs/*
 
 # Local configuration file (sdk path, etc)
-project.properties
-.classpath
+#project.properties
+#.classpath
 .directory
