@@ -21,6 +21,7 @@ import javax.ws.rs.Produces;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import java.lang.reflect.Type;
+import model.SearchAccessPoint;
 /**
  * REST Web Service
  *
@@ -78,15 +79,17 @@ public class CalculatePosition {
         
         Type collection = new TypeToken<ArrayList<AccessPoint>>(){}.getType();
         aps = new Gson().fromJson(content, collection);
+        
+        SearchAccessPoint s = new SearchAccessPoint(aps);
 
-        for (AccessPoint ap : aps) {
-            if(ap.getBssid().equals("00:1d:73:55:f9:b0") && ap.getRssi() > -76){
-                System.out.println("######### SALA 0.2");
-                return "Sala 0.2";
-            }else if(ap.getBssid().equals("00:1d:73:55:f9:ac") && ap.getRssi() > -76){
-                System.out.println("######### SALA 0.4");
-                return "Sala 0.4";
-            }
+        
+        if((s.getApIndex("00:1d:73:55:f9:b0") != -1) && (aps.get(s.getApIndex("00:1d:73:55:f9:b0")).getRssi() > -70)){
+           return "Sala 0.2"; 
+        }
+        
+        if(((s.getApIndex("00:1d:73:55:f9:ac") != -1) && (aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() > -76))
+                && (s.getApIndex("00:1d:73:55:fa:0c") != -1) && (aps.get(s.getApIndex("00:1d:73:55:fa:0c")).getRssi() > -78)){
+           return "Sala 0.3"; 
         }
      
         return "-";

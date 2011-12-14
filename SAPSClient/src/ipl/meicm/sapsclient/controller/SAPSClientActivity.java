@@ -2,6 +2,7 @@ package ipl.meicm.sapsclient.controller;
 
 import ipl.meicm.sapsclient.R;
 import ipl.meicm.sapsclient.controller.ScanService.LocalBinder;
+import ipl.meicm.sapsclient.model.entity.AccessPoint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -44,12 +45,22 @@ public class SAPSClientActivity extends Activity {
 
 	public void clickHandler(View v) {
 
+		String temp ="";
+		String x = "";
 		if (mService.isMoving()) {
-			Toast.makeText(getApplicationContext(),
-					"Device's moving.\n" + mService.store, Toast.LENGTH_SHORT)
+			x = "Device's moving.\n" + mService.store;
+			for (AccessPoint ap : mService.getAps()) {
+				temp += temp + "\nBSSID: " + ap.getBssid() + "=" + ap.getRssi();
+			}
+			Toast.makeText(getApplicationContext(), x + temp, Toast.LENGTH_SHORT)
 					.show();
 		} else {
-			Toast.makeText(getApplicationContext(), mService.store,
+			x = "Device's not moving.\n" + mService.store;
+			
+			for (AccessPoint ap : mService.getAps()) {
+				temp += temp + "\nBSSID: " + ap.getBssid() + "=" + ap.getRssi();
+			}
+			Toast.makeText(getApplicationContext(), x + temp,
 					Toast.LENGTH_SHORT).show();
 		}
 	}

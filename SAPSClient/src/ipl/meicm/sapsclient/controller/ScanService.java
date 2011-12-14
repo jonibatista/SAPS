@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class ScanService extends Service {
-	private static final long UPDATE_TIMER = 2500;
+	private static final long UPDATE_TIMER = 2000;
 	private static final int NUMBER_SCAN = 5;
 	private static final String SSID = "saps";// "Thomson5682BF"; //
 	// "DLink-B6EE0F";
@@ -177,7 +177,10 @@ public class ScanService extends Service {
 					isMoving = calculatePos.isMoving(currentScanRound,
 							previousScanRound);
 				}
-
+				
+				// temp
+				isMoving = true;
+				
 				if (isMoving) {
 					try {
 
@@ -247,6 +250,10 @@ public class ScanService extends Service {
 	 */
 	public boolean isMoving() {
 		return isMoving;
+	}
+	
+	public List<AccessPoint> getAps(){
+		return previousScanRound;
 	}
 
 }
