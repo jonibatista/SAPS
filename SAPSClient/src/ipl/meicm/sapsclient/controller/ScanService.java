@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class ScanService extends Service {
-	public static final long UPDATE_TIMER = 5000;
+	public static final long UPDATE_TIMER = 2000;
 	private static final int NUMBER_SCAN = 1;
 	private static final String SSID = "saps";// "Thomson5682BF"; //
 	// "DLink-B6EE0F";
@@ -177,10 +177,10 @@ public class ScanService extends Service {
 					isMoving = calculatePos.isMoving(currentScanRound,
 							previousScanRound);
 				}
-				
+
 				// temp
 				isMoving = true;
-				
+
 				if (isMoving) {
 					try {
 
@@ -189,29 +189,28 @@ public class ScanService extends Service {
 						String gsonAps = new Gson().toJson(currentScanRound,
 								collectionType);
 
-						Log.i("GSON STRING", currentScanRound.size() + "\n"
-								+ gsonAps);
+						//Log.i("GSON STRING", currentScanRound.size() + "\n" + gsonAps);
 
 						com = new RestComunication(WS_URL);
 
 						store = com.webInvoke(gsonAps);
 
-						Log.i("RESULT", store);
+						//Log.i("RESULT", store);
 					} catch (Exception e) {
 						Log.e(ScanService.class.getName(), e.toString());
 					}
 				}
 
-				Log.e("################", isMoving + "");
-
-				for (AccessPoint last : currentScanRound) {
-					for (AccessPoint prev : previousScanRound) {
-						if (last.equals(prev)) {
-							Log.e("PREVIOUS AP", "" + prev.getRssi());
-							Log.e("LAST AP", "" + last.getRssi());
-						}
-					}
-				}
+				// Log.e("################", isMoving + "");
+				//
+				// for (AccessPoint last : currentScanRound) {
+				// for (AccessPoint prev : previousScanRound) {
+				// if (last.equals(prev)) {
+				// Log.e("PREVIOUS AP", "" + prev.getRssi());
+				// Log.e("LAST AP", "" + last.getRssi());
+				// }
+				// }
+				// }
 
 				previousScanRound = new ArrayList<AccessPoint>(currentScanRound);
 
@@ -251,8 +250,9 @@ public class ScanService extends Service {
 	public boolean isMoving() {
 		return isMoving;
 	}
-	
-	public List<AccessPoint> getAps(){
+
+	public List<AccessPoint> getAps() {
+		Log.e(getClass().getName(), "" + previousScanRound.size());
 		return previousScanRound;
 	}
 

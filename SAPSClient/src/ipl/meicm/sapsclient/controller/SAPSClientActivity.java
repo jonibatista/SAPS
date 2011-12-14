@@ -15,6 +15,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class SAPSClientActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		new Timer().schedule(new MyTimerTask(), 1000, ScanService.UPDATE_TIMER);
+		new Timer().schedule(new MyTimerTask(), 2000, ScanService.UPDATE_TIMER);
 	}
 
 	@Override
@@ -101,6 +102,8 @@ public class SAPSClientActivity extends Activity {
 					temp += temp + "\nBSSID: " + ap.getBssid() + "="
 							+ ap.getRssi();
 				}
+				
+				Log.e(getClass().getName(), "" +  mService.getAps().size());
 
 				((TextView) findViewById(R.id.textView2))
 						.setText(mService.store);
