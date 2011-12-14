@@ -22,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import model.SearchAccessPoint;
+
 /**
  * REST Web Service
  *
@@ -47,7 +48,7 @@ public class CalculatePosition {
         //TODO return proper representation object
         throw new UnsupportedOperationException();
     }
-    
+
     /**
      * Retrieves representation of an instance of service.CalculatePosition
      * @return an instance of java.lang.String
@@ -59,7 +60,6 @@ public class CalculatePosition {
         //TODO return proper representation object
         return "pong " + id;
     }
-    
 
     /**
      * PUT method for updating or creating an instance of CalculatePosition
@@ -70,31 +70,36 @@ public class CalculatePosition {
     @Consumes("application/json")
     public void putJson(String content) {
     }*/
-
     @POST
-    @Consumes({"application/json","application/xml"})
+    @Consumes({"application/json", "application/xml"})
     public String postCalculatePosition(String content) {
         String store = "";
         ArrayList<AccessPoint> aps = new ArrayList<AccessPoint>();
-        
-        Type collection = new TypeToken<ArrayList<AccessPoint>>(){}.getType();
+
+        Type collection = new TypeToken<ArrayList<AccessPoint>>() {
+        }.getType();
         aps = new Gson().fromJson(content, collection);
-        
+
         SearchAccessPoint s = new SearchAccessPoint(aps);
 
-        
-        if((s.getApIndex("00:1d:73:55:f9:b0") != -1) && (aps.get(s.getApIndex("00:1d:73:55:f9:b0")).getRssi() > -70)){
-            if(s.getApIndex("00:1d:73:55:f9:ac") == -1)
-             return "Sala 0.2"; 
-            else if((s.getApIndex("00:1d:73:55:f9:ac") != -1) && (aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() > -80))
-             return "Sala 0.2"; 
+
+        if (s.getApIndex("00:1d:73:55:f9:b0") != -1) {
+            if (aps.get(s.getApIndex("00:1d:73:55:f9:b0")).getRssi() > -64)
+                return "Sala 0.2";
+        }
+
+        if (s.getApIndex("00:1d:73:55:f9:0c") != -1) {
+            if (aps.get(s.getApIndex("00:1d:73:55:f9:0c")).getRssi() > -94) {
+                return "Sala 0.3";
+            }
+        }
+
+        if ((s.getApIndex("00:1d:73:55:f9:ac") != -1)) {
+            if (aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() > -75) {
+                return "Sala 0.4";
+            }
         }
         
-        if((s.getApIndex("00:1d:73:55:f9:ac") != -1)){
-            if(aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() > -80)
-               return "Sala 0.4";
-    }
-     
         return "-";
     }
 }
