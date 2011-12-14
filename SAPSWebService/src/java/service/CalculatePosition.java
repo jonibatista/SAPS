@@ -84,13 +84,16 @@ public class CalculatePosition {
 
         
         if((s.getApIndex("00:1d:73:55:f9:b0") != -1) && (aps.get(s.getApIndex("00:1d:73:55:f9:b0")).getRssi() > -70)){
-           return "Sala 0.2"; 
+            if(s.getApIndex("00:1d:73:55:f9:ac") == -1)
+             return "Sala 0.2"; 
+            else if((s.getApIndex("00:1d:73:55:f9:ac") != -1) && (aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() > -80))
+             return "Sala 0.2"; 
         }
         
-        if(((s.getApIndex("00:1d:73:55:f9:ac") != -1) && (aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() > -76))
-                && (s.getApIndex("00:1d:73:55:fa:0c") != -1) && (aps.get(s.getApIndex("00:1d:73:55:fa:0c")).getRssi() > -78)){
-           return "Sala 0.3"; 
-        }
+        if((s.getApIndex("00:1d:73:55:f9:ac") != -1)){
+            if(aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() > -80)
+               return "Sala 0.4";
+    }
      
         return "-";
     }

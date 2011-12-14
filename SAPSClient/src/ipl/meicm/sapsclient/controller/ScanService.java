@@ -27,8 +27,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class ScanService extends Service {
-	private static final long UPDATE_TIMER = 2000;
-	private static final int NUMBER_SCAN = 5;
+	public static final long UPDATE_TIMER = 5000;
+	private static final int NUMBER_SCAN = 1;
 	private static final String SSID = "saps";// "Thomson5682BF"; //
 	// "DLink-B6EE0F";
 	private static final String WS_URL = "http://192.168.1.107:8080/SAPSWebService/resources/generic";
