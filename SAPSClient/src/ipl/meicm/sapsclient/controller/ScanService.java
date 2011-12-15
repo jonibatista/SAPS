@@ -31,7 +31,7 @@ public class ScanService extends Service {
 	private static final int NUMBER_SCAN = 1;
 	private static final String SSID = "saps";// "Thomson5682BF"; //
 	// "DLink-B6EE0F";
-	private static final String WS_URL = "https://192.168.152.140:8181/SAPSWebService/resources/generic";
+	private static final String WS_URL = "https://192.168.1.117:8181/SAPSWebService/resources/generic";
 
 	private Timer time;
 	private WifiManager wifi;

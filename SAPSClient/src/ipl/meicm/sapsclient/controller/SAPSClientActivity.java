@@ -110,7 +110,7 @@ public class SAPSClientActivity extends Activity {
 
 				((TextView) findViewById(R.id.textView2))
 						.setText(mService.store);
-				((TextView) findViewById(R.id.textView3)).setText(temp);
+				//((TextView) findViewById(R.id.textView3)).setText(temp);
 			}
 		};
 

@@ -82,20 +82,22 @@ public class CalculatePosition {
 
         SearchAccessPoint s = new SearchAccessPoint(aps);
 
-
         if (s.getApIndex("00:1d:73:55:f9:b0") != -1) {
-            if (aps.get(s.getApIndex("00:1d:73:55:f9:b0")).getRssi() > -64)
+            if (aps.get(s.getApIndex("00:1d:73:55:f9:b0")).getRssi() > -65)
                 return "Sala 0.2";
         }
 
-        if (s.getApIndex("00:1d:73:55:f9:0c") != -1) {
-            if (aps.get(s.getApIndex("00:1d:73:55:f9:0c")).getRssi() > -70) {
+        if (s.getApIndex("00:1d:73:55:fa:0c") != -1) {
+            if((s.getApIndex("00:1d:73:55:f9:ac") != -1)){
+                if (aps.get(s.getApIndex("00:1d:73:55:fa:0c")).getRssi() > aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() && aps.get(s.getApIndex("00:1d:73:55:fa:0c")).getRssi() > -65)
+                    return "Sala 0.3";
+            }else if (aps.get(s.getApIndex("00:1d:73:55:fa:0c")).getRssi() > -65) {
                 return "Sala 0.3";
             }
         }
 
         if ((s.getApIndex("00:1d:73:55:f9:ac") != -1)) {
-            if (aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() > -75) {
+            if (aps.get(s.getApIndex("00:1d:73:55:f9:ac")).getRssi() > -65) {
                 return "Sala 0.4";
             }
         }
