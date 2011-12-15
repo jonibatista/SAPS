@@ -66,7 +66,7 @@ public class CalculatePosition {
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      *
-    @PUT
+    @POST
     @Consumes("application/json")
     public void putJson(String content) {
     }*/
@@ -89,7 +89,7 @@ public class CalculatePosition {
         }
 
         if (s.getApIndex("00:1d:73:55:f9:0c") != -1) {
-            if (aps.get(s.getApIndex("00:1d:73:55:f9:0c")).getRssi() > -94) {
+            if (aps.get(s.getApIndex("00:1d:73:55:f9:0c")).getRssi() > -70) {
                 return "Sala 0.3";
             }
         }

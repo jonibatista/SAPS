@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class ScanService extends Service {
-	public static final long UPDATE_TIMER = 2000;
+	public static final long UPDATE_TIMER = 500;
 	private static final int NUMBER_SCAN = 1;
 	private static final String SSID = "saps";// "Thomson5682BF"; //
 	// "DLink-B6EE0F";

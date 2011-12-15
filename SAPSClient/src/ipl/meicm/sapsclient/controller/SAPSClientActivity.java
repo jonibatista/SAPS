@@ -33,7 +33,7 @@ public class SAPSClientActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		new Timer().schedule(new MyTimerTask(), 2000, ScanService.UPDATE_TIMER);
+		new Timer().schedule(new MyTimerTask(), 2000, ScanService.UPDATE_TIMER+100);
 	}
 
 	@Override
@@ -97,13 +97,16 @@ public class SAPSClientActivity extends Activity {
 	public class MyTimerTask extends TimerTask {
 		private Runnable runnable = new Runnable() {
 			public void run() {
+				((TextView) findViewById(R.id.textView2)).setText("");
+				((TextView) findViewById(R.id.textView3)).setText("");
 				String temp = "";
+				
 				for (AccessPoint ap : mService.getAps()) {
 					temp += temp + "\nBSSID: " + ap.getBssid() + "="
 							+ ap.getRssi();
 				}
-				
-				Log.e(getClass().getName(), "" +  mService.getAps().size());
+
+				Log.e(getClass().getName(), "" + mService.getAps().size());
 
 				((TextView) findViewById(R.id.textView2))
 						.setText(mService.store);
