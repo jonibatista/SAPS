@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,8 @@ public class SAPSClientActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		new Timer().schedule(new MyTimerTask(), 2000, ScanService.UPDATE_TIMER+100);
+		new Timer().schedule(new MyTimerTask(), 2000,
+				ScanService.UPDATE_TIMER + 100);
 	}
 
 	@Override
@@ -100,7 +102,7 @@ public class SAPSClientActivity extends Activity {
 				((TextView) findViewById(R.id.textView2)).setText("");
 				((TextView) findViewById(R.id.textView3)).setText("");
 				String temp = "";
-				
+
 				for (AccessPoint ap : mService.getAps()) {
 					temp += temp + "\nBSSID: " + ap.getBssid() + "="
 							+ ap.getRssi();
@@ -110,7 +112,23 @@ public class SAPSClientActivity extends Activity {
 
 				((TextView) findViewById(R.id.textView2))
 						.setText(mService.store);
-				//((TextView) findViewById(R.id.textView3)).setText(temp);
+
+				ImageView i = (ImageView) findViewById(R.id.imageView1);
+
+				if (mService.store.equals("Sala 0.4")) {
+					i.setBackgroundResource(R.drawable.zara);
+				} else
+
+				if (mService.store.equals("Sala 0.3")) {
+					i.setBackgroundResource(R.drawable.hm);
+				} else
+
+				if (mService.store.equals("Sala 0.2")) {
+					i.setBackgroundResource(R.drawable.levis);
+				} else {
+					i.setBackgroundResource(R.drawable.show_image_pending);
+				}
+				// ((TextView) findViewById(R.id.textView3)).setText(temp);
 			}
 		};
 
